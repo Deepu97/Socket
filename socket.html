@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+</head>
+<body>
+    <div id="div">
+        <input type="text" id="inp">
+        <button onclick="sendMessage()">send message</button>
+        
+    </div>
+   <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script>
+  const socket = io("http://localhost:3000");
+  const div=document.getElementById('div');
+function sendMessage(){
+    const inp=document.getElementById("inp");
+    socket.emit("message",inp.value);
+    socket.on("message", (data) => {
+    const p=document.createElement('p');
+    p.innerHTML=data;
+    div.appendChild(p);
+  });
+}
+  // send message to server
+  socket.emit("message", "Hello Server!");
+
+  // listen for message
+  
+</script>
+
+</body>
+</html>
